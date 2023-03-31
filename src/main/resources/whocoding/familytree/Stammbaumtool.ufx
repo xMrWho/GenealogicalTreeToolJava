@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>28</x>
+      <y>301</y>
+      <w>329</w>
+      <h>413</h>
+    </coordinates>
+    <panel_attributes>gui.controller::rlsDialogController2
+--
+-// Value injected by FXMLLoader&#13;
+removeChildBtn: Button
+-// Value injected by FXMLLoader&#13;
+editChildBtn: Button
+-// Value injected by FXMLLoader&#13;
+addPartnerBtn: Button
+-// Value injected by FXMLLoader&#13;
+partner2: TextField
+-// Value injected by FXMLLoader&#13;
+partner1: TextField
+-// Value injected by FXMLLoader&#13;
+children: ListView&lt;Person&gt;
+-// Value injected by FXMLLoader&#13;
+infos: TextArea
+-// Value injected by FXMLLoader&#13;
+btnSaveInfos: Button
+-relation: Relationship
+-ctrl1: rlsDialogController1
+-partner01, partner02, choosenChild: Person
+-method = "": String
+-con = GenelogicalTreeTool.sql.getConnection(): Connection
+--
++rlsDialogController2(rlsDialogController1 ctrl, Relationship relation): ctor
+-addChildToRelation(String old_rel_uuid, String c_uuid): void
++setPerson(Person p): void
+~addChild(ActionEvent event): void
+~addPartner(ActionEvent event): void
+~editChild(ActionEvent event): void
+~removeChild(ActionEvent event): void
+~saveInfos(ActionEvent event): void
+-setItems(): void
+-setStuff(): void
+~initialize(): void
+-choosePerson(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>14</x>
+      <y>1120</y>
+      <w>546</w>
+      <h>378</h>
+    </coordinates>
+    <panel_attributes>classes::Person
+--
+-uuid: UUID
+-name, firstname, gender, birthday, deathday, data: String
+-age: int
+-relationships: ArrayList&lt;Relationship&gt;
+--
++Person(UUID uuid, String name, String firstname, String gender, String birthday, String deathday, String data, int age): ctor
++Person(): ctor
++getUuid(): UUID
++setUuid(UUID uuid): void
++getName(): String
++setName(String name): void
++getFirstname(): String
++setFirstname(String firstname): void
++getGender(): String
++setGender(String gender): void
++getBirthday(): String
++setBirthday(String birthday): void
++getDeathday(): String
++setDeathday(String deathday): void
++getData(): String
++setData(String data): void
++getAge(): int
++setAge(int age): void
++getRelationships(): ArrayList&lt;Relationship&gt;
++setRelationships(ArrayList&lt;Relationship&gt; relationships): void
++getRelationship(String r_uuid): Relationship
++getRelationship(Person partner): Relationship
++addRelationship(Relationship r): void
++removeRelationship(Person partner): void
++calculateAge(): int
++toString(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>301</y>
+      <w>273</w>
+      <h>371</h>
+    </coordinates>
+    <panel_attributes>gui.controller::rlsDialogController1
+--
+-con = GenelogicalTreeTool.sql.getConnection(): Connection
+-current, parent01, parent02: Person
+-choosenRelation: Relationship
+-// Value injected by FXMLLoader&#13;
+delRelationBtn: Button
+-// Value injected by FXMLLoader&#13;
+editRelationBtn: Button
+-// Value injected by FXMLLoader&#13;
+addParentBtn: Button
+-// Value injected by FXMLLoader&#13;
+parent2: TextField
+-// Value injected by FXMLLoader&#13;
+parent1: TextField
+-// Value injected by FXMLLoader&#13;
+choosenPerson: TextField
+-// Value injected by FXMLLoader&#13;
+relationships: ListView&lt;Relationship&gt;
+~method = "": String
+--
++rlsDialogController1(Person person): ctor
++setPerson(Person p): void
+~addParent(ActionEvent event): void
+-choosePerson(): void
+~addRelationship(ActionEvent event): void
+~delRelationship(ActionEvent event): void
+~editRelationship(ActionEvent event): void
++setItems(): void
++setStuff(): void
+~initialize(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>581</x>
+      <y>1120</y>
+      <w>259</w>
+      <h>322</h>
+    </coordinates>
+    <panel_attributes>classes::Relationship
+--
+-uuid: UUID
+-partner0, partner1: Person
+-infos, date_begin, date_end: String
+-children = new ArrayList&lt;Person&gt;(): ArrayList&lt;Person&gt;
+--
++Relationship(Person partner1, Person partner2): ctor
++Relationship(Person partner1): ctor
++getUuid(): UUID
++setUuid(UUID uuid): void
++getPartner0(): Person
++setPartner0(Person partner0): void
++getPartner1(): Person
++setPartner1(Person partner1): void
++getInfos(): String
++setInfos(String infos): void
++getDate_begin(): String
++setDate_begin(String date_begin): void
++getDate_end(): String
++setDate_end(String date_end): void
++getChildren(): ArrayList&lt;Person&gt;
++setChildren(ArrayList&lt;Person&gt; children): void
++addChild(Person p): void
++removeChild(Person p): void
++toString(): String
++toString(Person p): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>847</x>
+      <y>301</y>
+      <w>378</w>
+      <h>322</h>
+    </coordinates>
+    <panel_attributes>gui.controller::personViewerController
+--
+-person: Person
+-ctrlCalledFrom: PersonSettableClass
+-formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"): DateTimeFormatter
+-// Value injected by FXMLLoader&#13;
+pictures: Button
+-// Value injected by FXMLLoader&#13;
+firstname: TextArea
+-// Value injected by FXMLLoader&#13;
+genderChooser: ChoiceBox&lt;String&gt;
+-// Value injected by FXMLLoader&#13;
+lastname: TextArea
+-// Value injected by FXMLLoader&#13;
+birthday: DatePicker
+-// Value injected by FXMLLoader&#13;
+deathday: DatePicker
+-// Value injected by FXMLLoader&#13;
+infoField: TextArea
+-con = GenelogicalTreeTool.sql.getConnection(): Connection
+--
++personViewerController(PersonSettableClass ctrlCalledFrom, Person person): ctor
+~editRelationShips(ActionEvent event): void
+~finishWorkover(ActionEvent event): void
+~showPictureExplorer(ActionEvent event): void
+~initialize(): void
+-initFields(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>357</x>
+      <y>301</y>
+      <w>189</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>gui.controller::mainViewController
+--
+-// Value injected by FXMLLoader&#13;
+gripPane: GridPane
+-// Value injected by FXMLLoader&#13;
+choosenPersonText: TextArea
+-// Value injected by FXMLLoader&#13;
+choosePersonBtn: Button
+-// Value injected by FXMLLoader&#13;
+showTreeBtn: Button
+-// Value injected by FXMLLoader&#13;
+delPersonBtn: Button
+-// Value injected by FXMLLoader&#13;
+showPersonBtn: Button
+--
++setPerson(Person p): void
+~choosePerson(ActionEvent event): void
+~createPerson(ActionEvent event): void
+~delPerson(ActionEvent event): void
+~showFamilyTree(ActionEvent event): void
+~showPerson(ActionEvent event): void
+-checkForPersons(): boolean
+~initialize(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1246</x>
+      <y>301</y>
+      <w>217</w>
+      <h>231</h>
+    </coordinates>
+    <panel_attributes>gui.controller::treeToolController
+--
+-p, choosen: Person
+-// Value injected by FXMLLoader&#13;
+treeView: TreeView&lt;Person&gt;
+-// Value injected by FXMLLoader&#13;
+showInfoBtn: Button
+-// Value injected by FXMLLoader&#13;
+editBtn: Button
+-// Value injected by FXMLLoader&#13;
+infoDialog: TextArea
+--
++treeToolController(Person p): ctor
+~choosePersonEvent(ActionEvent event): void
+-closeProgramEvent(ActionEvent event): void
+-createPersonEvent(ActionEvent event): void
+~edit(ActionEvent event): void
+~showInfo(ActionEvent event): void
++initialize(): void
+-addParents(TreeItem&lt;Person&gt; node): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>203</x>
+      <y>812</y>
+      <w>336</w>
+      <h>231</h>
+    </coordinates>
+    <panel_attributes>gui.dialogs::MyAlert
+--
+-title, header, content: String
+-type: MyAlertType
+-alert: Alert
+--
++MyAlert(MyAlertType type, String title, String header, String content): ctor
++getTitle(): String
++setTitle(String title): void
++getHeader(): String
++setHeader(String header): void
++getContent(): String
++setContent(String content): void
++getType(): MyAlertType
++setType(MyAlertType type): void
++getAlert(): Alert
++setAlert(Alert alert): void
++getResult(): Optional&lt;?&gt;
++showAlert(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1386</x>
+      <y>567</y>
+      <w>336</w>
+      <h>196</h>
+    </coordinates>
+    <panel_attributes>gui.controller::PersonChooserDialogController
+--
+-ctrlCalledFrom: PersonSettableClass
+-current: Person
+-// Value injected by FXMLLoader&#13;
+personView: ListView&lt;Person&gt;
+-// Value injected by FXMLLoader&#13;
+firstNameSearch: TextField
+-// Value injected by FXMLLoader&#13;
+lastNameSearch: TextField
+--
++PersonChooserDialogController(PersonSettableClass ctrlCalledFrom): ctor
+~choosePerson(ActionEvent event): void
+~searchPerson(ActionEvent event): void
+-setItems(): void
+-setStuff(): void
+~initialize(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>7</y>
+      <w>364</w>
+      <h>203</h>
+    </coordinates>
+    <panel_attributes>methods::relationShipMethods
+--
+-con = GenelogicalTreeTool.sql.getConnection(): Connection
+--
++createRelationship(Person partner1, Person partner2, String infos): Relationship
++createRelationship(Person partner1, String infos): Relationship
++getRelationship(Person partner01, Person partner02): Relationship
++getRelationship(String r_uuid): Relationship
++getRelationships(Person p): ArrayList&lt;Relationship&gt;
++relationExists(String R_UUID): boolean
++relationExists(Person partner1, Person partner2): boolean
++addChild(String r_uuid, String p_uuid): boolean
++removeChild(String r_uuid, String p_uuid): boolean
++removeChildren(String r_uuid): boolean
++delRelationship(String r_uuid): boolean
++getChildren(String r_uuid): ArrayList&lt;Person&gt;
++hasOnePartner(String r_uuid): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>574</x>
+      <y>812</y>
+      <w>259</w>
+      <h>196</h>
+    </coordinates>
+    <panel_attributes>gui.dialogs::MyDialog
+--
+-title, header, content: String
+-dialog: Dialog&lt;?&gt;
+--
++MyDialog(String title, String header, String content): ctor
++getTitle(): String
++setTitle(String title): void
++getHeader(): String
++setHeader(String header): void
++getContent(): String
++setContent(String content): void
++getDialog(): Dialog&lt;?&gt;
++setDialog(Dialog&lt;?&gt; dialog): void
++getResult(): Optional&lt;?&gt;
++showDialog(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>371</x>
+      <y>7</y>
+      <w>343</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>methods::createPersonMethods
+--
+-con = GenelogicalTreeTool.sql.getConnection(): Connection
+-name, firstname, gender, birthday, deathday, data: String
+-formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"): DateTimeFormatter
+--
++setName(): boolean
+-setFirstname(): boolean
+-setGender(): boolean
+-setBirthday(): boolean
+-setDeathday(): boolean
+-setData(): boolean
+-finalDialog(): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1743</x>
+      <y>0</y>
+      <w>406</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>methods::parentMethods
+--
+-con = GenelogicalTreeTool.sql.getConnection(): Connection
+--
++childIsInTable(String p_uuid): boolean
++getRelationUUIDFromChild(String p_uuid): String
++getParents(Person p): ArrayList&lt;Person&gt;
++setParent(Person child, Person parentOLD, Person partner, Person parentNEW): boolean
++addFirstParentToChild(Person child, Person parent): boolean
++addParent(Person current, Person parent01, Person newParent): boolean
++delChild(String p_uuid): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>728</x>
+      <y>1554</y>
+      <w>168</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>/sql::Database/
+--
+#connection: Connection
+--
+#Database(): ctor
++openConnection(): Connection
++checkConnection(): boolean
++getConnection(): Connection
++closeConnection(): boolean
++querySQL(String query): ResultSet
++updateSQL(String query): int
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1372</x>
+      <y>812</y>
+      <w>385</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>gui.dialogs::ExceptionDialog
+--
+-exception: Exception
+--
++ExceptionDialog(String title, String header, String content, Exception exception): ctor
++ExceptionDialog(String title, String header, String content): ctor
++getException(): Exception
++setException(Exception exception): void
++showAlert(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1785</x>
+      <y>812</y>
+      <w>392</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>gui.dialogs::MyTextInputDialog
+--
+--
++MyTextInputDialog(String title, String header, String content, String defaultValue): ctor
++MyTextInputDialog(String header, String content, String defaultValue): ctor
++MyTextInputDialog(String content, String defaultValue): ctor
++MyTextInputDialog(String defaultValue): ctor
++MyTextInputDialog(): ctor
++getFromInputDialog(TextInputDialog dialog, String defaultInput): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1134</x>
+      <y>1078</y>
+      <w>259</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>main::GenelogicalTreeTool
+--
++sql: MySQL
+-loader: FXMLLoader
++persons = new ArrayList&lt;Person&gt;(): ArrayList&lt;Person&gt;
+--
++initSQL(): boolean
++main(String[] args): void
++start(Stage stage): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>749</x>
+      <y>0</y>
+      <w>637</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>methods::personMethods
+--
+-con = GenelogicalTreeTool.sql.getConnection(): Connection
+--
++createPersonFromDatabase(String p_uuid, String name, String firstname, String gender, String birthday, String deathday, String infos): Person
++delPerson(String p_uuid): boolean
++getPerson(String p_uuid): Person
++initPersonsFromDatabase(): void
++getDescendantsFromPerson(String p_uuid): ArrayList&lt;Person&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>924</x>
+      <y>1554</y>
+      <w>280</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>sql::DatabaseMethods
+--
+~con = GenelogicalTreeTool.sql.getConnection(): Connection
+--
++initDatabase(): boolean
+-useDatabase(): boolean
+-initPersonTable(): boolean
+-initRelationshipTable(): boolean
+-initChildrenTable(): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2254</x>
+      <y>812</y>
+      <w>301</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>gui.dialogs::CancelDialog
+--
+--
+-myCancelMethod(String title, String header, String msg): boolean
++cancelMethod(): boolean
++cancelMethod(String msg): boolean
++cancelMethod(String header, String msg): boolean
++cancelMethod(String title, String header, String msg): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>1554</y>
+      <w>427</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>sql::MySQL
+--
+-user, database, password, port, hostname: String
+--
++MySQL(String hostname, String port, String database, String username, String password): ctor
++MySQL(String hostname, String port, String username, String password): ctor
++openConnection(): Connection
++isConnected(): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>854</x>
+      <y>812</y>
+      <w>511</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>gui.dialogs::MyChoiceDialog
+--
+--
++MyChoiceDialog(String title, String header, String content, Object defaultChoice, ArrayList&lt;Object&gt; choices): ctor
++MyChoiceDialog(String header, String content, Object defaultChoice, ArrayList&lt;Object&gt; choices): ctor
++MyChoiceDialog(String content, Object defaultChoice, ArrayList&lt;Object&gt; choices): ctor
++MyChoiceDialog(Object defaultChoice, ArrayList&lt;Object&gt; choices): ctor
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>854</x>
+      <y>1120</y>
+      <w>154</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>classes::PersonSettableClass
+--
+-person: Person
+--
++getPerson(): Person
++setPerson(Person person): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1407</x>
+      <y>0</y>
+      <w>315</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>methods::searchMethods
+--
+-con = GenelogicalTreeTool.sql.getConnection(): Connection
+--
++searchPerson(String firstname, String lastname): ArrayList&lt;Person&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
